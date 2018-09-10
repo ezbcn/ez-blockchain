@@ -3,7 +3,7 @@ const port = 8080
 
 const requestHandler = (request, response) => {
   console.log(request.url)
-  response.end('Hello Node.js Server!')
+  response.end('Hello Node.js Server')
 }
 
 const server = http.createServer(function (req, res) {
