@@ -8,7 +8,7 @@
     "url": "git+https://github.com/ezbcn/ez-blockchain-middleware.git"
   },
   "scripts": {
-     "start": "nodemon --exec babel-node --presets env,stage-2 src/index.js"
+    "start": "nodemon --exec babel-node --presets env,stage-2 src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,18 +17,12 @@
   },
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.4",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
+    "express": "^4.15.4",
+    "ganache-cli": "^6.1.8",
     "nodemon": "^1.18.4",
-    "ganache-cli": {
-      "version": "6.1.6",
-      "resolved": "https://registry.npmjs.org/ganache-cli/-/ganache-cli-6.1.6.tgz",
-      "integrity": "sha512-S+mPguwQD8dt9T0O/7mH941U9IYDbmCsoenCr31Zlr9yxjSYdNbWYGj3xsNw8CViZsMRGwIYeCaHPqK4bx2YVw==",
-      "requires": {
-        "source-map-support": "0.5.6"
-      }
-    }
+    "web3": "^0.20.2"
   }
 }
