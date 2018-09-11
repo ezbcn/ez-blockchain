@@ -12,9 +12,10 @@ eth.get('/:acc', (req, res) => {
         balance = web3.toDecimal(balance);
         
         console.log(balance);
-        balance = balance.toString();
-        res.setHeader('Content-Type', 'text/plain');
-        res.status(200).send(balance);
+        var balanceValue = balance.toString();
+        var response = {balance :balanceValue};
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).send(JSON.stringify(response));
 
     }
     catch (e) {
