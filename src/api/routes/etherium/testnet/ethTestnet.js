@@ -1,27 +1,23 @@
 import express from 'express'
 import Web3 from 'web3'
-const eth = express.Router()
+const ethTestnetRoute = express.Router()
 
-eth.get('/:acc', (req, res) => {
+ethTestnetRoute.get('/getbalance/:walledId', (req, res) => {
     try {
-
         const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
-        
-        var account = req.url.split('/')[1];
-        var balance = web3.eth.getBalance(account);
-        balance = web3.toDecimal(balance);
-        
-        console.log(balance);
-        var balanceValue = balance.toString();
-        var response = {balance :balanceValue};
+        var balance = web3.eth.getBalance(req.params.walledId);
+        var response = {
+            network : 'etherium testnet',
+            walletId: req.params.walledId,
+            balance: web3.toDecimal(balance),
+            date: new Date()
+        };
         res.setHeader('Content-Type', 'application/json');
         res.status(200).send(JSON.stringify(response));
-
     }
     catch (e) {
         res.status(200).send("La dirección ingresada no es una dirección válida.");
     }
-
 })
 
-export default eth
+export default ethTestnetRoute
