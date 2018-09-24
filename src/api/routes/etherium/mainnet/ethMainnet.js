@@ -1,17 +1,17 @@
 import express from 'express'
 import Web3 from 'web3'
-
 const ethMainnetRoute = express.Router()
 
-ethMainnetRoute.get('/getbalance/:walledId',
-    (req, res) => {
+ethMainnetRoute.get('/getbalance/:walledId',(req, res) => {
         try {
+
+            console.log(req);
 
             const web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/"));
 
             var balance = web3.eth.getBalance(req.params.walledId);
             var response = {
-                network: 'etherium mainnet',
+                network: 'ethereum mainnet',
                 walletId: req.params.walledId,
                 balance: web3.toDecimal(balance),
                 date: new Date()
