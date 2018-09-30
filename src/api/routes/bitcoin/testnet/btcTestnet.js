@@ -5,26 +5,29 @@ const ethMainnetRoute = express.Router()
 
 ethMainnetRoute.get('/getbalance/:walledId', (req, res) => {
     try {
-        console.log('antes')
-            https.get('https://api.blockcypher.com/v1/btc/main/addrs/1DEP8i3QJCsomS4BSMY2RpU1upv62aGvhD', (resp) => {
 
-        console.log('despues')
+        console.log('OK');
 
-            var balance = resp;
-            var response = {
-                network: 'bitcoin mainnet',
-                walletId: req.params.walledId,
-                balance: balance,
-                date: new Date()
-            };
-            
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).send(JSON.stringify(response));
+        var request = require('request');
+        var options = {
+        };
 
-        }).on("error", (err) => {
-            console.log("Error: " + err.message);
-        });
+        request.get('https://api.blockcypher.com/v1/btc/test3/addrs/' + req.params.walledId, options,
+            (err, resp, body) => {
 
+
+            var btcBalance = JSON.parse(resp.body);
+                var response = {
+                    network: 'bitcoin testnet',
+                    walletId: req.params.walledId,
+                    balance: btcBalance.balance,
+                    date: new Date()
+                };
+
+                res.setHeader('Content-Type', 'application/json');
+                res.status(200).send(JSON.stringify(response));
+
+            }).on("error", (err) => { console.log("Error: " + err.message); });
     }
     catch (e) {
         console.log('error');
