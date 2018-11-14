@@ -3,25 +3,53 @@ import Web3 from 'web3'
 import Utils from 'web3-utils'
 
 const ethTestnetRoute = express.Router()
+const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
 
-ethTestnetRoute.get('/getbalance/:walledId', (req, res) => {
+ethTestnetRoute.get('/getwalletinfo/:walledId', (req, res) => {
     try {
 
-        console.log(req.params.walledId);
-        const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
         var balance = web3.eth.getBalance(req.params.walledId);
-        
-        console.log(balance);
-        
         var response = {
             network: 'ethereum testnet',
             walletId: req.params.walledId,
             balance: web3.toDecimal(balance),
             date: new Date()
         };
-        
+
         res.setHeader('Content-Type', 'application/json');
         res.status(200).send(JSON.stringify(response));
+    }
+    catch (e) {
+        res.status(500).send("La dirección ingresada no es una dirección válida.");
+    }
+})
+
+ethTestnetRoute.get('/getbalance/:walledId', (req, res) => {
+    try {
+
+        var balance = web3.eth.getBalance(req.params.walledId);
+        var response = {
+            balance: web3.toDecimal(balance)
+        };
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).send(JSON.stringify(response));
+    }
+    catch (e) {
+        res.status(500).send("La dirección ingresada no es una dirección válida.");
+    }
+})
+
+ethTestnetRoute.get('/balanceisnotenough/:walledId', (req, res) => {
+    try {
+
+        var balance = web3.eth.getBalance(req.params.walledId);
+        
+        var resp = {
+            response: web3.toDecimal(balance) <= 0
+        };
+        
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).send(JSON.stringify(resp));
     }
     catch (e) {
         res.status(500).send("La dirección ingresada no es una dirección válida.");
@@ -32,17 +60,14 @@ ethTestnetRoute.get('/gettransaction/:txid', (req, res) => {
     try {
 
         var txhash = req.params.txid;
-        
-        const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
         var txObject = web3.eth.getTransaction(txhash);
-        
         var response = {
             network: 'ethereum testnet',
             txObject: txObject,
             txid: txhash,
             date: new Date()
         };
-        
+
         res.setHeader('Content-Type', 'application/json');
         res.status(200).send(JSON.stringify(response));
     }
@@ -50,7 +75,6 @@ ethTestnetRoute.get('/gettransaction/:txid', (req, res) => {
         res.status(500).send("El id transacción ingresado no existe o no se encontraron resultados.");
     }
 })
-
 
 ethTestnetRoute.get('/sendtransaction/:to/:from/:pk/:hashdata', (req, res) => {
     try {
