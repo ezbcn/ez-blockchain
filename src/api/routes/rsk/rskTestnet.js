@@ -2,17 +2,17 @@ import express from 'express'
 import Web3 from 'web3'
 import Utils from 'web3-utils'
 
-const ethTestnetRoute = express.Router()
+const rskTestnetRoute = express.Router()
 
 //const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
 const web3 = new Web3(new Web3.providers.HttpProvider("https://public-node.testnet.rsk.co/"));
 
-ethTestnetRoute.get('/getwalletinfo/:walledId', (req, res) => {
+rskTestnetRoute.get('/getwalletinfo/:walledId', (req, res) => {
     try {
 
         var balance = web3.eth.getBalance(req.params.walledId);
         var response = {
-            network: 'ethereum testnet',
+            network: 'rsk testnet',
             walletId: req.params.walledId,
             balance: web3.toDecimal(balance),
             date: new Date()
@@ -26,7 +26,7 @@ ethTestnetRoute.get('/getwalletinfo/:walledId', (req, res) => {
     }
 })
 
-ethTestnetRoute.get('/getbalance/:walledId', (req, res) => {
+rskTestnetRoute.get('/getbalance/:walledId', (req, res) => {
     try {
 
         var balance = web3.eth.getBalance(req.params.walledId);
@@ -41,7 +41,7 @@ ethTestnetRoute.get('/getbalance/:walledId', (req, res) => {
     }
 })
 
-ethTestnetRoute.get('/balanceisnotenough/:walledId', (req, res) => {
+rskTestnetRoute.get('/balanceisnotenough/:walledId', (req, res) => {
     try {
 
         var balance = web3.eth.getBalance(req.params.walledId);
@@ -58,13 +58,13 @@ ethTestnetRoute.get('/balanceisnotenough/:walledId', (req, res) => {
     }
 })
 
-ethTestnetRoute.get('/gettransaction/:txid', (req, res) => {
+rskTestnetRoute.get('/gettransaction/:txid', (req, res) => {
     try {
 
         var txhash = req.params.txid;
         var txObject = web3.eth.getTransaction(txhash);
         var response = {
-            network: 'ethereum testnet',
+            network: 'rsk testnet',
             txObject: txObject,
             txid: txhash,
             date: new Date()
@@ -78,7 +78,7 @@ ethTestnetRoute.get('/gettransaction/:txid', (req, res) => {
     }
 })
 
-ethTestnetRoute.get('/sendtransaction/:to/:from/:pk/:hashdata', (req, res) => {
+rskTestnetRoute.get('/sendtransaction/:to/:from/:pk/:hashdata', (req, res) => {
     
     try {
 
@@ -137,4 +137,4 @@ ethTestnetRoute.get('/sendtransaction/:to/:from/:pk/:hashdata', (req, res) => {
     }
 })
 
-export default ethTestnetRoute
+export default rskTestnetRoute
