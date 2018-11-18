@@ -20,8 +20,8 @@ export const createServer = async() => {
     app.use('/bitcoin/testnet/', btcTestnet);
     app.use('/bitcoin/mainnet/', btcMainnet);
     
-    app.use('/rsk/testnet/', rskTestnet);
-    app.use('/rsk/mainnet/', rskMainnet);
+  //  app.use('/rsk/testnet/', rskTestnet);
+    //app.use('/rsk/mainnet/', rskMainnet);
     
     //Valida que la dirección sea existente
     app.use((req, res) => { res.status(404).send('Error 404 - Dirección no encontrada'); });
