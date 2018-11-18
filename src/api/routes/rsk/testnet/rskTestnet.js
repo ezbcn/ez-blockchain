@@ -110,7 +110,7 @@ rskTestnetRoute.get('/sendtransaction/:to/:from/:pk/:hashdata', (req, res) => {
                 gasPrice: Utils.toHex('150000'),
                 gasLimit: Utils.toHex('120000'),
                 to: addressTo,
-                value: Utils.toHex(Utils.toWei('70000', 'Gwei')),
+                value: Utils.toHex(Utils.toWei('0', 'Gwei')),
                 data: '0x' + hashdata
             }
 
