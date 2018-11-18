@@ -9,7 +9,7 @@ ethMainnetRoute.get('/getwalletinfo/:walledId', (req, res) => {
 
         var balance = web3.eth.getBalance(req.params.walledId);
         var response = {
-            network: 'ethereum testnet',
+            network: 'ethereum mainnet',
             walletId: req.params.walledId,
             balance: web3.toDecimal(balance),
             date: new Date()
@@ -61,7 +61,7 @@ ethMainnetRoute.get('/gettransaction/:txid', (req, res) => {
         var txhash = req.params.txid;
         var txObject = web3.eth.getTransaction(txhash);
         var response = {
-            network: 'ethereum testnet',
+            network: 'ethereum mainnet',
             txObject: txObject,
             txid: txhash,
             date: new Date()

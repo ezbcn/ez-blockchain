@@ -8,7 +8,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io
 
 ethTestnetRoute.get('/getwalletinfo/:walledId', (req, res) => {
     try {
-
+        console.log('HI!')
         var balance = web3.eth.getBalance(req.params.walledId);
         var response = {
             network: 'ethereum testnet',
