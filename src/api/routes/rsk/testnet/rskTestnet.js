@@ -1,15 +1,14 @@
 import express from 'express'
 import Web3 from 'web3'
 import Utils from 'web3-utils'
-
 const rskTestnetRoute = express.Router()
 
-//const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
 const web3 = new Web3(new Web3.providers.HttpProvider("https://public-node.testnet.rsk.co/"));
 
 rskTestnetRoute.get('/getwalletinfo/:walledId', (req, res) => {
     try {
 
+/*
         var balance = web3.eth.getBalance(req.params.walledId);
         var response = {
             network: 'rsk testnet',
@@ -17,14 +16,21 @@ rskTestnetRoute.get('/getwalletinfo/:walledId', (req, res) => {
             balance: web3.toDecimal(balance),
             date: new Date()
         };
+        
+        */
 
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).send(JSON.stringify(response));
+        res.status(200).send(JSON.stringify({req : req.params.walledId}));
     }
     catch (e) {
         res.status(500).send("La dirección ingresada no es una dirección válida.");
     }
 })
+
+export default rskTestnetRoute
+
+
+/*
 
 rskTestnetRoute.get('/getbalance/:walledId', (req, res) => {
     try {
@@ -135,6 +141,4 @@ rskTestnetRoute.get('/sendtransaction/:to/:from/:pk/:hashdata', (req, res) => {
     catch (e) {
         res.status(500).send("No se pudo realizar la tranasacción. Ocurrión durante el proceso: " + e.message);
     }
-})
-
-export default rskTestnetRoute
+})*/
