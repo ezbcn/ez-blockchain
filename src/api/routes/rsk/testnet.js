@@ -4,7 +4,8 @@ import Utils from 'web3-utils'
 
 const ethTestnetRoute = express.Router()
 
-const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
+//const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
+const web3 = new Web3(new Web3.providers.HttpProvider("https://public-node.testnet.rsk.co/"));
 
 ethTestnetRoute.get('/getwalletinfo/:walledId', (req, res) => {
     try {
@@ -84,7 +85,9 @@ ethTestnetRoute.get('/sendtransaction/:to/:from/:pk/:hashdata', (req, res) => {
         console.log(req.params);
         var response = {}
 
-        const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/95cf80f107e6402ea79805bf72b84d5f"));
+        //const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/95cf80f107e6402ea79805bf72b84d5f"));
+        const web3 = new Web3(new Web3.providers.HttpProvider("https://public-node.testnet.rsk.co/"));
+        //https://public-node.testnet.rsk.co/
         var Tx = require('ethereumjs-tx');
 
         //const privateKey = new Buffer('cbd2aa9bb5af213f086e6ec77cabee89da89cb68013788be1697bd628257389e', 'hex')

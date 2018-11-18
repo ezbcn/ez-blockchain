@@ -1,29 +1,35 @@
-import express from 'express'
+/*import express from 'express'
 import Web3 from 'web3'
 import Utils from 'web3-utils'
+*/
 
 
-        var txhash = req.params.txid;
-        
-        const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
-        
-        var tx = web3.eth.getTransaction(txhash);
-        
-        asynctx.then(console.log);
-        
-        var response = {
-            network: 'ethereum testnet',
-            walletId: req.params.walledId,
-            //txid: tx,
-            date: new Date()
-        };
-        
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).send(JSON.stringify(response));
-    }
-    catch (e) {
-        res.status(500).send("El id transacción ingresado no existe.");
-    }
+const Web3 = require('web3')
+const express = require("express")
+const Utils = require("web3-utils")
+
+var txhash = req.params.txid;
+
+const web3 = new Web3(new Web3.providers.HttpProvider("http://public-node.testnet.rsk.co/"));
+
+var tx = web3.eth.getTransaction(txhash);
+
+asynctx.then(console.log);
+
+var response = {
+    network: 'ethereum testnet',
+    walletId: req.params.walledId,
+    //txid: tx,
+    date: new Date()
+};
+
+res.setHeader('Content-Type', 'application/json');
+res.status(200).send(JSON.stringify(response));
+}
+
+catch (e) {
+    res.status(500).send("El id transacción ingresado no existe.");
+}
 })
 
 
