@@ -13,7 +13,7 @@ ethTestnetRoute.get('/getwalletinfo/:walledId', (req, res) => {
         var response = {
             network: 'ethereum testnet',
             walletId: req.params.walledId,
-            balance: web3.toDecimal(balance),
+            balance: balance,
             date: new Date()
         };
 
