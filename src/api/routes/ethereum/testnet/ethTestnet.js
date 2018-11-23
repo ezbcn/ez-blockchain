@@ -30,7 +30,7 @@ ethTestnetRoute.get('/getbalance/:walledId', (req, res) => {
 
         var balance = web3.eth.getBalance(req.params.walledId);
         var response = {
-            balance: parseFloat(balance)
+            balance: balance
         };
         res.setHeader('Content-Type', 'application/json');
         res.status(200).send(JSON.stringify(response));
